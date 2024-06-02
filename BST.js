@@ -180,7 +180,33 @@ No duplicates are allowed in BST!`
 		// If no callback was provided, return the array of node values
 		return result;
 	}
-    
+
+	inOrder(callback) {
+		// Array to hold the nodes value if no callback is provided!
+		let result = [];
+
+		// Start the traversal at the root!
+		this.inOrderHelper(this.root, callback, result);
+		// Return the array of node values!
+		return result;
+	}
+
+	inOrderHelper(node, callback, result) {
+		if (node !== null) {
+			// Traverse the left subtree!
+			this.inOrderHelper(node.left, callback, result);
+			// If a callback is provided, call it with the current node!
+			if (callback) {
+				callback(node);
+			}
+			// Otherwise add the node's data to the result array!
+			else {
+				result.push(node.data);
+			}
+			// Traverse the right subtree!
+			this.inOrderHelper(node.right, callback, result);
+		}
+	}
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {
