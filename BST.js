@@ -207,6 +207,32 @@ No duplicates are allowed in BST!`
 			this.inOrderHelper(node.right, callback, result);
 		}
 	}
+
+	preOrder(callback) {
+		// Initialize an array to hold the node values if no callback is provided
+		let result = [];
+		// Start the traversal at the root of the tree
+		this.preOrderHelper(this.root, callback, result);
+		// Return the array of node values!
+		return result;
+	}
+
+	preOrderHelper(node, callback, result) {
+		if (node !== null) {
+			if (callback) {
+				// If a callback is provided, call it with the current node!
+				callback(node);
+			} else {
+				// Otherwise, add the node to the result array
+				result.push(node.data);
+			}
+
+			// Traverse the left subtree!
+			this.preOrderHelper(node.left, callback, result);
+			// Traverse the right subtree!
+			this.preOrderHelper(node.right, callback, result);
+		}
+	}
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {

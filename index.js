@@ -11,4 +11,5 @@ tree.delete(12);
 console.log(tree.find(8));
 console.log(`Level Order: ${tree.levelOrder()}`);
 console.log(`In Order: ${tree.inOrder()}`);
+console.log(`Pre Order: ${tree.preOrder()}`);
 prettyPrint(tree.root);
