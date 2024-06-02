@@ -6,4 +6,6 @@ let tree = new Tree([4, 2, 9, 6, 5, 3, 8, 1, 2, 12, 45, 33, 27, 7, 10, 7]);
 // Test Tree methods
 tree.insert(24);
 tree.insert(8);
+tree.insert(0);
+tree.delete(12);
 prettyPrint(tree.root);

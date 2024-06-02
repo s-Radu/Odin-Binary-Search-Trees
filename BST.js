@@ -68,6 +68,61 @@ No duplicates are allowed in BST!`
 			);
 		}
 	}
+
+	delete(key) {
+		this.root = this.deleteNode(this.root, key);
+	}
+
+	deleteNode(node, key) {
+		// If the subtree is empty, there's nothing to delete
+		if (node === null) return null;
+
+		// If the key to delete is less than the node's data, delete from the left subtree
+		if (key < node.data) {
+			node.left = this.deleteNode(node.left, key);
+			return node;
+		}
+		// If the key to delete is greater than the node's data, delete from the right subtree
+		else if (key > node.data) {
+			node.right = this.deleteNode(node.right, key);
+			return node;
+		}
+		// If the key to delete is equal to the node's data, delete this node
+		else {
+			// Case 1 - No Child
+			// If the node has no children, just remove it
+			if (node.left === null && node.right === null) {
+				node = null;
+				return node;
+			}
+			// Case 2 - One Child
+			// If the node has a right child but no left child, replace the node with its right child
+			else if (node.left === null) {
+				node = node.right;
+				return node;
+				// If the node has a left child but no right child, replace the node with its left child
+			} else if (node.right === null) {
+				node = node.left;
+				return node;
+			}
+			// Case 3 - Two Children
+			// If the node has two children, replace it with its in-order successor (smallest node in its right subtree)
+			let tmp = this.findMinNode(node.right);
+			node.data = tmp.data;
+			// Delete the in-order successor
+			node.right = this.deleteNode(node.right, tmp.data);
+			return node;
+		}
+	}
+
+	findMinNode(node) {
+		// If the node has a left child, find the minimum node in the left subtree
+		if (node.left === null) {
+			return node;
+		} else {
+			return this.findMinNode(node.left);
+		}
+	}
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {
