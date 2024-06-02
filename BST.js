@@ -6,7 +6,7 @@ class Node {
 	}
 }
 
-class Tree {
+export default class Tree {
 	constructor(array) {
 		this.root = this.buildTree(array);
 	}
@@ -30,21 +30,55 @@ class Tree {
 
 		return node;
 	}
+
+	insert(value) {
+		// ifthe tree is empty, create a new node with the value and insert it as the root
+		if (this.root === null) {
+			this.root = new Node(value);
+		} else {
+			// else, start the recursive insert process at the root
+			this.insertNode(this.root, value);
+		}
+	}
+
+	insertNode(node, value) {
+		// If, the value is less then the node data, go left!
+		if (value < node.data) {
+			// If there is no left child, insert here!
+			if (node.left === null) {
+				node.left = new Node(value);
+			} else {
+				// Else, recursive call on the left child!
+				this.insertNode(node.left, value);
+			}
+			// If the value is greater then the node data, go right!
+		} else if (value > node.data) {
+			// If there is no right child, insert here!
+			if (node.right === null) {
+				node.right = new Node(value);
+			} else {
+				// Else, recursive call on the right child!
+				this.insertNode(node.right, value);
+			}
+		} else {
+			// The key is equal to the node's data, so it's a duplicate
+			console.log(
+				`Duplicate value: ${value}.
+No duplicates are allowed in BST!`
+			);
+		}
+	}
 }
 
-const prettyPrint = (node, prefix = '', isLeft = true) => {
+export function prettyPrint(node, prefix = '', isLeft = true) {
 	if (node === null) {
 		return;
 	}
 	if (node.right !== null) {
-		prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+		prettyPrint(node.right, prefix + (isLeft ? '│   ' : '    '), false);
 	}
-	console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+	console.log(prefix + (isLeft ? '└── ' : '┌── ') + node.data);
 	if (node.left !== null) {
-		prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+		prettyPrint(node.left, prefix + (isLeft ? '    ' : '│   '), true);
 	}
-};
-
-// Test with an unsorted array
-let tree = new Tree([4, 2, 9, 6, 5, 3, 8, 1, 2, 12, 45, 33, 27, 7, 10, 7]);
-prettyPrint(tree.root);
+}
