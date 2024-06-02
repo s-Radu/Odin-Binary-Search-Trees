@@ -259,6 +259,20 @@ No duplicates are allowed in BST!`
 			}
 		}
 	}
+
+	height(node) {
+		// If the node is null, return -1
+		if (!node) {
+			return -1;
+		}
+
+		// Compute the height of each subtree
+		let leftHeight = this.height(node.left);
+		let rightHeight = this.height(node.right);
+
+		// The height of the node is the maximum height of the subtrees plus one
+		return Math.max(leftHeight, rightHeight) + 1;
+	}
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {
