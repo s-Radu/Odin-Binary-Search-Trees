@@ -139,6 +139,48 @@ No duplicates are allowed in BST!`
 			return node;
 		}
 	}
+
+	levelOrder(callback) {
+		// Initialize an array to hold the node values if no callback is provided
+		let result = [];
+
+		// If the tree is empty, return the empty array
+		if (this.root === null) {
+			return result;
+		}
+
+		// Initialize a queue and add the root node to it
+		let queue = [];
+		queue.push(this.root);
+
+		// Loop as long as there are nodes in the queue
+		while (queue.length > 0) {
+			// Remove the first node from the queue
+			let node = queue.shift();
+
+			// If a callback is provided, call it with the current node
+			// Otherwise, add the node's data to the result array
+			if (callback) {
+				callback(node);
+			} else {
+				result.push(node.data);
+			}
+
+			// If the current node has a left child, add it to the queue
+			if (node.left !== null) {
+				queue.push(node.left);
+			}
+
+			// If the current node has a right child, add it to the queue
+			if (node.right !== null) {
+				queue.push(node.right);
+			}
+		}
+
+		// If no callback was provided, return the array of node values
+		return result;
+	}
+    
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {
