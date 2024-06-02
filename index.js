@@ -12,4 +12,5 @@ console.log(tree.find(8));
 console.log(`Level Order: ${tree.levelOrder()}`);
 console.log(`In Order: ${tree.inOrder()}`);
 console.log(`Pre Order: ${tree.preOrder()}`);
+console.log(`Post Order: ${tree.postOrder()}`);
 prettyPrint(tree.root);

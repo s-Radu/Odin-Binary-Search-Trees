@@ -209,9 +209,9 @@ No duplicates are allowed in BST!`
 	}
 
 	preOrder(callback) {
-		// Initialize an array to hold the node values if no callback is provided
+		// Initialize an array to hold the node values if no callback is provided!
 		let result = [];
-		// Start the traversal at the root of the tree
+		// Start the traversal at the root of the tree!
 		this.preOrderHelper(this.root, callback, result);
 		// Return the array of node values!
 		return result;
@@ -223,7 +223,7 @@ No duplicates are allowed in BST!`
 				// If a callback is provided, call it with the current node!
 				callback(node);
 			} else {
-				// Otherwise, add the node to the result array
+				// Otherwise, add the node to the result array!
 				result.push(node.data);
 			}
 
@@ -231,6 +231,32 @@ No duplicates are allowed in BST!`
 			this.preOrderHelper(node.left, callback, result);
 			// Traverse the right subtree!
 			this.preOrderHelper(node.right, callback, result);
+		}
+	}
+
+	postOrder(callback) {
+		// Initialize an array to hold the node values if no callback is provided!
+		let result = [];
+		// Start the traversal at the root of the tree!
+		this.postOrderHelper(this.root, callback, result);
+		// Return the array of node values!
+		return result;
+	}
+
+	postOrderHelper(node, callback, result) {
+		if (node !== null) {
+			// Traverse the left subtree!
+			this.postOrderHelper(node.left, callback, result);
+			// Traverse the right subtree!
+			this.postOrderHelper(node.right, callback, result);
+
+			if (callback) {
+				// If a callback is provided, call it with the current node!
+				callback(node);
+			} else {
+				// Otherwise, add the node to the result array!
+				result.push(node.data);
+			}
 		}
 	}
 }
