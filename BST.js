@@ -32,7 +32,7 @@ export default class Tree {
 	}
 
 	insert(value) {
-		// ifthe tree is empty, create a new node with the value and insert it as the root
+		// if the tree is empty, create a new node with the value and insert it as the root
 		if (this.root === null) {
 			this.root = new Node(value);
 		} else {
@@ -69,8 +69,8 @@ No duplicates are allowed in BST!`
 		}
 	}
 
-	delete(key) {
-		this.root = this.deleteNode(this.root, key);
+	delete(value) {
+		this.root = this.deleteNode(this.root, value);
 	}
 
 	deleteNode(node, key) {
@@ -121,6 +121,22 @@ No duplicates are allowed in BST!`
 			return node;
 		} else {
 			return this.findMinNode(node.left);
+		}
+	}
+
+	find(value) {
+		// Call the private method which handles the recursion
+		return this.findNode(this.root, value);
+	}
+
+	findNode(node, value) {
+		if (node === null) return null;
+		if (value < node.data) {
+			return this.findNode(node.left, value);
+		} else if (value > node.data) {
+			return this.findNode(node.right, value);
+		} else {
+			return node;
 		}
 	}
 }
