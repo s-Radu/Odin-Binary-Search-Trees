@@ -297,6 +297,29 @@ No duplicates are allowed in BST!`
 
 		return Math.max(left, right);
 	}
+
+	isBalanced() {
+		return this.isBalancedHelper(this.root);
+	}
+
+	isBalancedHelper(node) {
+		// A null node is balanced by definition!
+		if (node === null) {
+			return true;
+		}
+
+		// Compute the height of the left and right subtree!
+		let leftHeight = this.height(node.left);
+		let rightHeight = this.height(node.right);
+
+		// Check the balance condition at the node and recursively check the subtrees!
+
+		return (
+			Math.abs(leftHeight - rightHeight) <= 1 &&
+			this.isBalancedHelper(node.left) &&
+			this.isBalancedHelper(node.right)
+		);
+	}
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {
