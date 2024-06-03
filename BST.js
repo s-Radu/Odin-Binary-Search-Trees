@@ -273,6 +273,30 @@ No duplicates are allowed in BST!`
 		// The height of the node is the maximum height of the subtrees plus one
 		return Math.max(leftHeight, rightHeight) + 1;
 	}
+
+	depth(node) {
+		return this.depthHelper(this.root, node, 0);
+	}
+
+	depthHelper(root, node, depth) {
+		// If the root is null, return -1!
+		if (root === null) {
+			return -1;
+		}
+
+		// If the root is the node we are looking for, return the depth!
+		if (root === node) {
+			return depth;
+		}
+
+		// Recursively call the helper function on the left and right subtree!
+		let left = this.depthHelper(root.left, node, depth + 1);
+		let right = this.depthHelper(root.right, node, depth + 1);
+
+		// Return the maximum of two depths!
+
+		return Math.max(left, right);
+	}
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {
