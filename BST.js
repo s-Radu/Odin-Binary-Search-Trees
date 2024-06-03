@@ -320,6 +320,11 @@ No duplicates are allowed in BST!`
 			this.isBalancedHelper(node.right)
 		);
 	}
+
+	rebalance() {
+		let nodes = this.inOrder();
+		this.root = this.buildTree(nodes);
+	}
 }
 
 export function prettyPrint(node, prefix = '', isLeft = true) {
