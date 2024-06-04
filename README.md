@@ -77,7 +77,3 @@ The tree is rebalanced using the `rebalance` method. The tree is then printed an
 ## Traversing the Tree
 
 The tree is traversed in level order, pre order, post order, and in order using the `levelOrder`, `preOrder`, `postOrder`, and `inOrder` methods respectively.
-
-## Commented Code
-
-There is commented code at the end of the file that tests the `Tree` class methods with an unsorted array. This includes inserting and deleting nodes, finding nodes, checking the height and depth of nodes, and checking if the tree is balanced.
